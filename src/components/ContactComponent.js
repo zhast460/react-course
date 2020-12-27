@@ -50,7 +50,8 @@ class Contact extends Component {
 
     handleBlur = (field) => (evt) => {
         this.setState({
-            touched: { ...this.state.touched, [field]: true }
+            // TODO: seems the touched flag is never reset
+            touched: { ...this.state.touched, [field]: true } // only replace [field] to true, retain the other fields to their original value.
         });
     }
 
