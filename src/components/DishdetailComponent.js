@@ -28,7 +28,7 @@ class CommentForm extends Component {
     }
 
     handleSubmit(values) {
-        alert(JSON.stringify(values))
+        this.props.addComment(this.props.dishId, values.rating, values.name, values.comment);
     }
 
     render() {
@@ -109,7 +109,7 @@ function RenderDish({ dish }) {
     );
 }
 
-function RenderComments({ comments }) {
+function RenderComments({ comments, addComment, dishId }) {
     if (comments) {
         const formatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
         return (
@@ -121,7 +121,7 @@ function RenderComments({ comments }) {
                             <p>-- {c.author} , {formatter.format(new Date(c.date))}</p>
                         </li>)}
                 </ul>
-                <CommentForm />
+                <CommentForm dishId={dishId} addComment={addComment} />
             </div>
         );
     } else {
@@ -144,7 +144,10 @@ const DishDetail = (props) => {
             </div>
             <div className="row">
                 <RenderDish dish={props.dish} />
-                <RenderComments comments={props.comments} />
+                <RenderComments comments={props.comments}
+                    addComment={props.addComment}
+                    dishId={props.dish.id}
+                />
             </div>
         </div>
     );
