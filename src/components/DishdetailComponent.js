@@ -120,7 +120,7 @@ function RenderDish({ dish }) {
 
 function RenderComments({ comments, postComment, dishId }) {
     if (comments) {
-        const formatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+        const formatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit' });
         return (
             <div>
                 <ul className="list-unstyled">
@@ -130,7 +130,7 @@ function RenderComments({ comments, postComment, dishId }) {
                                 <Fade in>
                                 <li key={comment.id}>
                                 <p>{comment.comment}</p>
-                                <p>-- {comment.author} , {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
+                                <p>-- {comment.author} , {formatter.format(new Date(Date.parse(comment.date)))}</p>
                                 </li>
                                 </Fade>
                             );
